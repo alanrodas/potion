@@ -1,6 +1,6 @@
 var gulp = require('gulp');
 var _ = require('underscore');
-var Potion = require('laravel-elixir');
+var Potion = require('cakephp-potion');
 var inSequence = require('run-sequence');
 
 

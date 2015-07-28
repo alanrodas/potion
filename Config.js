@@ -99,6 +99,18 @@ var config = {
 
     /*
      |----------------------------------------------------------------
+     | Bower Components Path
+     |----------------------------------------------------------------
+     |
+     | This is the directory where the bower components are downloaded
+     | by default
+     |
+     */
+
+    bowerPath: 'bower_components',
+
+    /*
+     |----------------------------------------------------------------
      | Sourcemaps
      |----------------------------------------------------------------
      |
@@ -109,6 +121,45 @@ var config = {
      */
 
     sourcemaps: true,
+
+    root: {
+
+        /*
+         |----------------------------------------------------------------
+         | The Root Folder
+         |----------------------------------------------------------------
+         |
+         | This is an empty folder representing the root folder for
+         | any path.
+         |
+         */
+
+        folder: '',
+
+        /*
+         |----------------------------------------------------------------
+         | The Root Output Folder
+         |----------------------------------------------------------------
+         |
+         | This is an empty output folder representing the root
+         | folder for any path.
+         |
+         */
+
+        outputFolder: '',
+
+        /*
+         |----------------------------------------------------------------
+         | The Bower Vendor Directory
+         |----------------------------------------------------------------
+         |
+         | This is the directory where the bower_components live in the
+         | public directory.
+         |
+         */
+
+        vendor: 'vendor'
+    },
 
     css: {
 
@@ -406,7 +457,8 @@ config.get = function(path) {
     // we can assume that the user wants to prefix the
     // given base url to their config path. Useful!
 
-    if (segments[0] == 'assets' || segments[0] == 'public') {
+    var rootPaths = ['assets', 'public', 'views', 'bower', 'app'];
+    if (rootPaths.indexOf(segments[0]) >= 0) {
         basePath = config[segments.shift()+'Path'];
     }
 
