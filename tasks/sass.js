@@ -1,8 +1,8 @@
 var gulp    = require('gulp');
 var compile = require('./shared/Css');
-var Elixir = require('laravel-elixir');
+var Potion = require('cakephp-potion');
 
-var config = Elixir.config;
+var config = Potion.config;
 
 
 /*
@@ -12,12 +12,12 @@ var config = Elixir.config;
  |
  | This task will compile your Sass, including minification and
  | and auto-prefixing. Sass is one of the CSS pre-precessors
- | supported by Elixir, along with the Less CSS processor.
+ | supported by Potion, along with the Less CSS processor.
  |
  */
 
 var gulpTask = function(src, output, options) {
-    new Elixir.Task('sass', function() {
+    new Potion.Task('sass', function() {
         var paths = prepGulpPaths(src, output);
 
         return compile({
@@ -33,13 +33,13 @@ var gulpTask = function(src, output, options) {
 };
 
 
-Elixir.extend('sass', function() {
+Potion.extend('sass', function() {
     gulpTask.apply(this, arguments);
 });
 
 
 // Deprecated. Only for backward compatibility.
-Elixir.extend('rubySass', function() {
+Potion.extend('rubySass', function() {
     gulpTask.apply(this, arguments);
 });
 
@@ -52,7 +52,7 @@ Elixir.extend('rubySass', function() {
  * @return {object}
  */
 var prepGulpPaths = function(src, output) {
-    return new Elixir.GulpPaths()
+    return new Potion.GulpPaths()
         .src(src, config.get('assets.css.sass.folder'))
         .output(output || config.get('public.css.outputFolder'), 'app.css');
 }

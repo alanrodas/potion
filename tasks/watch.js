@@ -1,6 +1,6 @@
 var gulp = require('gulp');
 var _ = require('underscore');
-var Elixir = require('laravel-elixir');
+var Potion = require('cakephp-potion');
 
 
 /*
@@ -14,13 +14,13 @@ var Elixir = require('laravel-elixir');
  |
  */
 gulp.task('watch', function() {
-    var tasks = _.sortBy(Elixir.tasks, 'name');
+    var tasks = _.sortBy(Potion.tasks, 'name');
 
     // Browserify uses a special watcher, so we'll
     // hook into that option, only for gulp watch.
 
     if (_.contains(_.pluck(tasks, 'name'), 'browserify')) {
-    Elixir.config.js.browserify.watchify.enabled = true;
+    Potion.config.js.browserify.watchify.enabled = true;
 
         gulp.start('browserify');
     }

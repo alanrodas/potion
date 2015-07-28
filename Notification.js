@@ -5,7 +5,7 @@ var notify = require('gulp-notify');
  * Create a new Notification instance.
  */
 var Notification = function() {
-    this.title = 'Laravel Elixir';
+    this.title = 'CakePHP Potion';
 
     // If an argument is provided, then we'll
     // assume they want to show a message.
@@ -26,7 +26,7 @@ n.message = function(message) {
     return notify({
         title: this.title,
         message: message,
-        icon: __dirname + '/icons/laravel.png',
+        icon: __dirname + '/icons/cakephp.png',
         onLast: true
     });
 };

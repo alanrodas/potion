@@ -2,11 +2,11 @@ var fs = require('fs');
 var del = require('del');
 var gulp = require('gulp');
 var rev = require('gulp-rev');
-var Elixir = require('laravel-elixir');
+var Potion = require('cakephp-potion');
 var vinylPaths = require('vinyl-paths');
 var parsePath  = require('parse-filepath');
 
-var publicPath  = Elixir.config.publicPath;
+var publicPath  = Potion.config.publicPath;
 
 
 /*
@@ -20,10 +20,10 @@ var publicPath  = Elixir.config.publicPath;
  |
  */
 
-Elixir.extend('version', function(src, buildPath) {
+Potion.extend('version', function(src, buildPath) {
     var paths = prepGulpPaths(src, buildPath);
 
-    new Elixir.Task('version', function() {
+    new Potion.Task('version', function() {
         var files = vinylPaths();
         var manifest = paths.output.baseDir + '/rev-manifest.json';
 
@@ -64,7 +64,7 @@ Elixir.extend('version', function(src, buildPath) {
 var prepGulpPaths = function(src, buildPath) {
     src = Array.isArray(src) ? src : [src];
 
-    return new Elixir.GulpPaths()
+    return new Potion.GulpPaths()
         .src(src)
         .output(buildPath || config.get('public.versioning.buildFolder'));
 };

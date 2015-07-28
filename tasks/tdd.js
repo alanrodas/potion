@@ -1,5 +1,5 @@
 var gulp = require('gulp');
-var Elixir = require('laravel-elixir');
+var Potion = require('cakephp-potion');
 
 
 /*
@@ -14,9 +14,9 @@ var Elixir = require('laravel-elixir');
  */
 
 gulp.task('tdd', function() {
-    new Elixir.Log.message('Watching for tests...');
+    new Potion.Log.message('Watching for tests...');
 
-    Elixir.tasks
+    Potion.tasks
         .filter(function(task) {
             return task.category == 'tdd';
         })

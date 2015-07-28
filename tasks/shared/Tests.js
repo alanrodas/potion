@@ -1,11 +1,11 @@
 var gulp = require('gulp');
-var Elixir = require('../../index');
+var Potion = require('../../index');
 
-var notify = new Elixir.Notification;
+var notify = new Potion.Notification;
 
 
 module.exports = function(options) {
-    new Elixir.Task(options.name, function() {
+    new Potion.Task(options.name, function() {
         this.log(options.src);
 
         return (
@@ -21,5 +21,5 @@ module.exports = function(options) {
         );
     })
     .watch(options.src, 'tdd')
-    .watch(Elixir.config.appPath + '/**/*.php', 'tdd');
+    .watch(Potion.config.appPath + '/**/*.php', 'tdd');
 };

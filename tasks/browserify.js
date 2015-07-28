@@ -3,14 +3,14 @@ var gutil = require('gulp-util');
 var babelify = require('babelify');
 var watchify = require('watchify');
 var buffer = require('vinyl-buffer');
-var Elixir = require('laravel-elixir');
+var Potion = require('cakephp-potion');
 var browserify = require('browserify');
 var partialify = require('partialify');
 var source = require('vinyl-source-stream');
 
 var bundle;
-var $ = Elixir.Plugins;
-var config = Elixir.config;
+var $ = Potion.Plugins;
+var config = Potion.config;
 
 
 /*
@@ -24,10 +24,10 @@ var config = Elixir.config;
  |
  */
 
-Elixir.extend('browserify', function(src, output, baseDir, options) {
+Potion.extend('browserify', function(src, output, baseDir, options) {
     var paths = prepGulpPaths(src, baseDir, output);
 
-    new Elixir.Task('browserify', function() {
+    new Potion.Task('browserify', function() {
         var stream = config.js.browserify.watchify.enabled
             ? watchifyStream
             : browserifyStream;
@@ -39,7 +39,7 @@ Elixir.extend('browserify', function(src, output, baseDir, options) {
                 stream
                 .bundle()
                 .on('error', function(e) {
-                    new Elixir.Notification().error(e, 'Browserify Failed!');
+                    new Potion.Notification().error(e, 'Browserify Failed!');
 
                     this.emit('end');
                 })
@@ -47,7 +47,7 @@ Elixir.extend('browserify', function(src, output, baseDir, options) {
                 .pipe(buffer())
                 .pipe($.if(config.production, $.uglify()))
                 .pipe(gulp.dest(paths.output.baseDir))
-                .pipe(new Elixir.Notification('Browserify Compiled!'))
+                .pipe(new Potion.Notification('Browserify Compiled!'))
             );
         }.bind(this);
 
@@ -74,7 +74,7 @@ Elixir.extend('browserify', function(src, output, baseDir, options) {
 var prepGulpPaths = function(src, baseDir, output) {
     baseDir = baseDir || config.get('assets.js.folder');
 
-    return new Elixir.GulpPaths()
+    return new Potion.GulpPaths()
         .src(src, baseDir)
         .output(output || config.get('public.js.outputFolder'), 'bundle.js');
 };

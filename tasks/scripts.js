@@ -1,8 +1,8 @@
 var gulp = require('gulp');
-var Elixir = require('laravel-elixir');
+var Potion = require('cakephp-potion');
 
-var $ = Elixir.Plugins;
-var config = Elixir.config;
+var $ = Potion.Plugins;
+var config = Potion.config;
 
 
 /*
@@ -16,10 +16,10 @@ var config = Elixir.config;
  |
  */
 
-Elixir.extend('scripts', function(scripts, output, baseDir) {
+Potion.extend('scripts', function(scripts, output, baseDir) {
     var paths = prepGulpPaths(scripts, baseDir, output);
 
-    new Elixir.Task('scripts', function() {
+    new Potion.Task('scripts', function() {
         return gulpTask.call(this, paths);
     })
     .watch(paths.src.path)
@@ -27,10 +27,10 @@ Elixir.extend('scripts', function(scripts, output, baseDir) {
 });
 
 
-Elixir.extend('scriptsIn', function(baseDir, output) {
+Potion.extend('scriptsIn', function(baseDir, output) {
     var paths = prepGulpPaths('**/*.js', baseDir, output);
 
-    new Elixir.Task('scriptsIn', function() {
+    new Potion.Task('scriptsIn', function() {
         return gulpTask.call(this, paths);
     })
     .watch(paths.src.path)
@@ -38,10 +38,10 @@ Elixir.extend('scriptsIn', function(baseDir, output) {
 });
 
 
-Elixir.extend('babel', function(scripts, output, baseDir, options) {
+Potion.extend('babel', function(scripts, output, baseDir, options) {
     var paths = prepGulpPaths(scripts, baseDir, output);
 
-    new Elixir.Task('babel', function() {
+    new Potion.Task('babel', function() {
         var babelOptions = options || config.js.babel.options;
 
         return gulpTask.call(this, paths, babelOptions)
@@ -69,7 +69,7 @@ var gulpTask = function(paths, babel) {
         .pipe($.if(config.production, $.uglify()))
         .pipe($.if(config.sourcemaps, $.sourcemaps.write('.')))
         .pipe(gulp.dest(paths.output.baseDir))
-        .pipe(new Elixir.Notification('Scripts Merged!'))
+        .pipe(new Potion.Notification('Scripts Merged!'))
     );
 };
 
@@ -82,7 +82,7 @@ var gulpTask = function(paths, babel) {
  * @param {string|null}  output
  */
 var prepGulpPaths = function(src, baseDir, output) {
-    return new Elixir.GulpPaths()
+    return new Potion.GulpPaths()
         .src(src, baseDir || config.get('assets.js.folder'))
         .output(output || config.get('public.js.outputFolder'), 'all.js');
 };

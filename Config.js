@@ -8,10 +8,10 @@ var gutils = require('gulp-util');
  |----------------------------------------------------------------
  |
  | This file contains the proper paths and options for each and
- | and every Gulp task that Elixir wraps up. To override any
- | setting, reference elixir.config.* from your Gulpfile.
+ | and every Gulp task that Potion wraps up. To override any
+ | setting, reference Potion.config.* from your Gulpfile.
  |
- | Alternatively you may create an elixir.json file within your
+ | Alternatively you may create an Potion.json file within your
  | project root. As JSON, modify any settings contained here
  | and they'll take precedence over these defaults. Easy!
  |
@@ -37,7 +37,7 @@ var config = {
      | Production Mode
      |----------------------------------------------------------------
      |
-     | Elixir will trigger certain actions, dependent upon this flag.
+     | Potion will trigger certain actions, dependent upon this flag.
      | You may "turn on" this mode by triggering "gulp --production".
      | This will enable such things, like CSS and JS minification.
      |
@@ -56,7 +56,20 @@ var config = {
      |
      */
 
-    assetsPath: 'resources/assets',
+    assetsPath: 'app/Assets/',
+
+    /*
+     |----------------------------------------------------------------
+     | Views Path
+     |----------------------------------------------------------------
+     |
+     | This public path property is prefixed to any paths in your
+     | application, that point to the views dir.
+     | It's useful, when a server requires a unique view path.
+     |
+     */
+
+    viewsPath: 'app/View',
 
     /*
      |----------------------------------------------------------------
@@ -69,7 +82,7 @@ var config = {
      |
      */
 
-    publicPath: 'public',
+    publicPath: 'app/webroot',
 
     /*
      |----------------------------------------------------------------
@@ -130,7 +143,7 @@ var config = {
          | CSS3 Autoprefixing
          |----------------------------------------------------------------
          |
-         | When working with any form of CSS, Elixir automatically runs
+         | When working with any form of CSS, Potion automatically runs
          | your file through a CSS autoprefixer, which automatically
          | adds or removes vendor-specific CSS3 prefixes. Useful!
          |
@@ -240,7 +253,7 @@ var config = {
          |----------------------------------------------------------------
          |
          | Browserify allows you to pull in Node modules in the browser!
-         | Generally a pain to get up and running, Elixir offers many
+         | Generally a pain to get up and running, Potion offers many
          | sensible defaults to get you up to speed super quickly.
          |
          */
@@ -291,6 +304,24 @@ var config = {
             folder: 'coffee',
 
             // https://github.com/wearefractal/gulp-coffee#options
+            options: {}
+        },
+
+        /*
+         |----------------------------------------------------------------
+         | Coffeeify Compilation
+         |----------------------------------------------------------------
+         |
+         | Coffeeify allows you to pull in Node modules in the browser
+         | with CoffeeScript! Generally a pain to get up and running,
+         | Potion offers many sensible defaults to get you up to speed
+         | super quickly.
+         |
+         */
+
+        coffeeify: {
+            folder: 'coffee',
+
             options: {}
         }
     },

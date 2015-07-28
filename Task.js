@@ -1,6 +1,6 @@
 var _ = require('underscore');
 
-var id = 0, Elixir;
+var id = 0, Potion;
 
 
 /**
@@ -26,9 +26,9 @@ var Task = function(name, description) {
  * @param {string} name
  */
 Task.find = function(name) {
-    var tasks = _.where(Elixir.tasks, { name: name });
+    var tasks = _.where(Potion.tasks, { name: name });
 
-    return tasks[Elixir.config.activeTasks[name]];
+    return tasks[Potion.config.activeTasks[name]];
 };
 
 
@@ -51,10 +51,10 @@ Task.prototype.describe = function(definition) {
  * Set the task to be called, when firing `Gulp`.
  */
 Task.prototype.register = function() {
-    Elixir.tasks.push(this);
+    Potion.tasks.push(this);
 
-    Elixir.config.activeTasks = Elixir.config.activeTasks || {};
-    Elixir.config.activeTasks[this.name] = 0;
+    Potion.config.activeTasks = Potion.config.activeTasks || {};
+    Potion.config.activeTasks[this.name] = 0;
 
     return this;
 };
@@ -106,21 +106,21 @@ Task.prototype.run = function() {
 Task.prototype.log = function(src, output) {
     var task = this.name.substr(0,1).toUpperCase() + this.name.substr(1);
 
-    Elixir.Log
+    Potion.Log
        .heading("Fetching " + task + " Source Files...")
        .files(src.path ? src.path : src, true);
 
     if (output) {
-        Elixir.Log
+        Potion.Log
             .heading('Saving To...')
             .files(output.path ? output.path : output);
     }
 };
 
 
-module.exports = function(elixir) {
-    // Make Elixir available throughout this file.
-    Elixir = elixir;
+module.exports = function(potion) {
+    // Make Potion available throughout this file.
+    Potion = potion;
 
     return Task;
 };

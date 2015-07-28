@@ -1,7 +1,7 @@
-var Elixir = require('laravel-elixir');
+var Potion = require('cakephp-potion');
 var runTests = require('./shared/Tests');
 
-var config = Elixir.config;
+var config = Potion.config;
 
 
 /*
@@ -15,11 +15,11 @@ var config = Elixir.config;
  |
  */
 
-Elixir.extend('phpSpec', function(src, options) {
+Potion.extend('phpSpec', function(src, options) {
     runTests({
         name: 'phpSpec',
         src: src || (config.testing.phpSpec.path + '/**/*Spec.php'),
-        plugin: Elixir.plugins.phpspec,
+        plugin: Potion.plugins.phpspec,
         pluginOptions: options || config.testing.phpSpec.options
     });
 });

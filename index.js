@@ -5,41 +5,41 @@ var gutils = require('gulp-util');
 
 
 /**
- * Elixir is a wrapper around Gulp.
+ * Potion is a wrapper around Gulp.
  *
  * @param {Function} recipe
  */
-var Elixir = function(recipe) {
+var Potion = function(recipe) {
     // We'll start by loading all of the available tasks.
     require('require-dir')('./tasks');
 
     // The user may then choose which tasks they want.
-    recipe(Elixir.mixins);
+    recipe(Potion.mixins);
 
     // Now that the user has requested their desired tasks
     // from the Gulpfile, we'll initialize everything!
-    createGulpTasks.call(Elixir);
+    createGulpTasks.call(Potion);
 };
 
 
-Elixir.mixins       = {};
-Elixir.Log          = require('./Logger');
-Elixir.Notification = require('./Notification');
-Elixir.GulpPaths    = require('./GulpPaths');
-Elixir.config       = config = require('./Config');
-Elixir.Task         = require('./Task')(Elixir);
-Elixir.tasks        = config.tasks;
-Elixir.Plugins      = require('gulp-load-plugins')();
+Potion.mixins       = {};
+Potion.Log          = require('./Logger');
+Potion.Notification = require('./Notification');
+Potion.GulpPaths    = require('./GulpPaths');
+Potion.config       = config = require('./Config');
+Potion.Task         = require('./Task')(Potion);
+Potion.tasks        = config.tasks;
+Potion.Plugins      = require('gulp-load-plugins')();
 
 
 /**
- * Register a new task with Elixir.
+ * Register a new task with Potion.
  *
  * @param {string}   name
  * @param {Function} callback
  */
-Elixir.extend = function(name, callback) {
-    Elixir.mixins[name] = function() {
+Potion.extend = function(name, callback) {
+    Potion.mixins[name] = function() {
         callback.apply(this, arguments);
 
         return this.mixins;
@@ -48,11 +48,11 @@ Elixir.extend = function(name, callback) {
 
 
 /**
- * Allow for config overrides, via an elixir.json file.
+ * Allow for config overrides, via a potion.json file.
  *
  * @param {string} file
  */
-Elixir.setDefaultsFrom = function(file) {
+Potion.setDefaultsFrom = function(file) {
     var overrides;
 
     if (fs.existsSync(file)) {
@@ -62,14 +62,14 @@ Elixir.setDefaultsFrom = function(file) {
             deepExtend: require('underscore-deep-extend')(_)
         });
 
-        _.deepExtend(Elixir.config, overrides);
+        _.deepExtend(Potion.config, overrides);
     }
-}('elixir.json');
+}('potion.json');
 
 
 /**
  * Create the actual Gulp tasks dynamically,
- * based upon the chosen Elixir mixins.
+ * based upon the chosen Potion mixins.
  */
 var createGulpTasks = function() {
     var tasks = this.tasks;
@@ -91,9 +91,9 @@ var createGulpTasks = function() {
 
             // On the other hand, if the user just triggered `gulp`,
             // then we can simply run the task, badabingbadaboom.
-            var gulp = Elixir.Task.find(task.name).run();
+            var gulp = Potion.Task.find(task.name).run();
 
-            // This is a little tricky. With Elixir, a single Gulp task
+            // This is a little tricky. With Potion, a single Gulp task
             // can be triggered multiple times, with unique sets of
             // data - which you provide, when you do mix.task().
 
@@ -104,11 +104,11 @@ var createGulpTasks = function() {
             // The Task.find method will then, when called, properly
             // return the correct data that corresponds to the
             //  active index for the current task. Got it?
-            Elixir.config.activeTasks[task.name]++;
+            Potion.config.activeTasks[task.name]++;
 
             return gulp;
         });
     });
 };
 
-module.exports = Elixir;
+module.exports = Potion;

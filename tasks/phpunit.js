@@ -1,7 +1,7 @@
-var Elixir = require('laravel-elixir');
+var Potion = require('cakephp-potion');
 var runTests = require('./shared/Tests');
 
-var config = Elixir.config;
+var config = Potion.config;
 
 
 /*
@@ -15,11 +15,11 @@ var config = Elixir.config;
  |
  */
 
-Elixir.extend('phpUnit', function(src, options) {
+Potion.extend('phpUnit', function(src, options) {
     runTests({
         name: 'phpUnit',
         src: src || (config.testing.phpUnit.path + '/**/*Test.php'),
-        plugin: Elixir.Plugins.phpunit,
+        plugin: Potion.Plugins.phpunit,
         pluginOptions: options || config.testing.phpUnit.options
     });
 });

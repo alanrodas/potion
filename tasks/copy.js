@@ -1,7 +1,7 @@
 var gulp = require('gulp');
-var Elixir = require('laravel-elixir');
+var Potion = require('cakephp-potion');
 
-var $ = Elixir.Plugins;
+var $ = Potion.Plugins;
 
 
 /*
@@ -15,10 +15,10 @@ var $ = Elixir.Plugins;
  |
  */
 
-Elixir.extend('copy', function(src, output) {
-    var paths = new Elixir.GulpPaths().src(src).output(output);
+Potion.extend('copy', function(src, output) {
+    var paths = new Potion.GulpPaths().src(src).output(output);
 
-    new Elixir.Task('copy', function() {
+    new Potion.Task('copy', function() {
         this.log(paths.src, paths.output);
 
         return (

@@ -1,8 +1,8 @@
 var gulp = require('gulp');
-var Elixir = require('laravel-elixir');
+var Potion = require('cakephp-potion');
 
-var $ = Elixir.Plugins;
-var config = Elixir.config;
+var $ = Potion.Plugins;
+var config = Potion.config;
 
 
 /*
@@ -16,10 +16,10 @@ var config = Elixir.config;
  |
  */
 
-Elixir.extend('styles', function(styles, output, baseDir) {
+Potion.extend('styles', function(styles, output, baseDir) {
     var paths = prepGulpPaths(styles, baseDir, output);
 
-    new Elixir.Task('styles', function() {
+    new Potion.Task('styles', function() {
         return gulpTask.call(this, paths);
     })
     .watch(paths.src.path)
@@ -27,10 +27,10 @@ Elixir.extend('styles', function(styles, output, baseDir) {
 });
 
 
-Elixir.extend('stylesIn', function(baseDir, output) {
+Potion.extend('stylesIn', function(baseDir, output) {
     var paths = prepGulpPaths('**/*.css', baseDir, output);
 
-    new Elixir.Task('stylesIn', function() {
+    new Potion.Task('stylesIn', function() {
         return gulpTask.call(this, paths);
     })
     .watch(paths.src.path)
@@ -54,7 +54,7 @@ var gulpTask = function(paths) {
         .pipe($.if(config.production, $.minifyCss()))
         .pipe($.if(config.sourcemaps, $.sourcemaps.write('.')))
         .pipe(gulp.dest(paths.output.baseDir))
-        .pipe(new Elixir.Notification('Stylesheets Merged!'))
+        .pipe(new Potion.Notification('Stylesheets Merged!'))
     );
 };
 
@@ -67,7 +67,7 @@ var gulpTask = function(paths) {
  * @return {object}
  */
 var prepGulpPaths = function(src, baseDir, output) {
-    return new Elixir.GulpPaths()
+    return new Potion.GulpPaths()
         .src(src, baseDir || config.get('assets.css.folder'))
         .output(output || config.get('public.css.outputFolder'), 'all.css');
 };

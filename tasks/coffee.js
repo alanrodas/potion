@@ -1,8 +1,8 @@
 var gulp   = require('gulp');
-var Elixir = require('laravel-elixir');
+var Potion = require('cakephp-potion');
 
-var $ = Elixir.Plugins;
-var config = Elixir.config;
+var $ = Potion.Plugins;
+var config = Potion.config;
 
 
 /*
@@ -16,8 +16,8 @@ var config = Elixir.config;
  |
  */
 
-Elixir.extend('coffee', function(src, output, options) {
-    new Elixir.Task('coffee', function() {
+Potion.extend('coffee', function(src, output, options) {
+    new Potion.Task('coffee', function() {
         var paths = prepGulpPaths(src, output);
 
         this.log(paths.src, paths.output);
@@ -28,7 +28,7 @@ Elixir.extend('coffee', function(src, output, options) {
             .pipe($.if(config.sourcemaps, $.sourcemaps.init()))
             .pipe($.coffee(options || config.js.coffee.options)
                 .on('error', function(e) {
-                    new Elixir.Notification('CoffeeScript Compilation Failed!');
+                    new Potion.Notification('CoffeeScript Compilation Failed!');
 
                     this.emit('end');
                 }))
@@ -36,7 +36,7 @@ Elixir.extend('coffee', function(src, output, options) {
             .pipe($.if(config.production, $.uglify()))
             .pipe($.if(config.sourcemaps, $.sourcemaps.write('.')))
             .pipe(gulp.dest(paths.output.baseDir))
-            .pipe(new Elixir.Notification('CoffeeScript Compiled!'))
+            .pipe(new Potion.Notification('CoffeeScript Compiled!'))
         );
     })
     .watch(config.get('assets.js.coffee.folder') + '/**/*.coffee')
@@ -51,7 +51,7 @@ Elixir.extend('coffee', function(src, output, options) {
  * @return {object}
  */
 var prepGulpPaths = function(src, output) {
-    return new Elixir.GulpPaths()
+    return new Potion.GulpPaths()
         .src(src, config.get('assets.js.coffee.folder'))
         .output(output || config.get('public.js.outputFolder'), 'app.js');
 };

@@ -1,7 +1,7 @@
 {
-  "name": "laravel-elixir",
+  "name": "cakephp-potion",
   "version": "3.0.5",
-  "description": "Laravel Elixir Core",
+  "description": "CakePHP Potion - Painless Gulp for CakePHP",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -16,10 +16,10 @@
     "gulp"
   ],
   "author": {
-    "name": "Taylor Otwell, Jeffrey Way"
+    "name": "Alan Rodas Bonjour"
   },
   "license": "MIT",
-  "homepage": "https://github.com/laravel/elixir",
+  "homepage": "https://github.com/alanrodas/potion",
   "dependencies": {
     "babelify": "^6.1.3",
     "browserify": "^10.2.6",
