@@ -21,9 +21,21 @@ Potion.extend('wiredep', function(file, options) {
             .src(file, config.get('views.root.folder'))
             .output(config.get('views.root.folder') + '/' + file);
 
+    function calculateIgnorePath() {
+        fileDir = paths.src.baseDir.split('/');
+        bowerDir = config.get('public.root.folder').split('/');
+        while (fileDir.length > 0 && bowerDir.length > 0 && fileDir[0] == bowerDir[0]) {
+            fileDir.shift(); bowerDir.shift();
+        }
+        ignorePath = '';
+        for (var i = 0; i < fileDir.length; i++) {ignorePath = ignorePath + '../';}
+        for (var j = 0; j < bowerDir.length - 1; j++) {ignorePath = ignorePath + bowerDir[j] + '/';}
+        return ignorePath + ((bowerDir.length > 0) ? bowerDir[bowerDir.length-1] : '');
+    }
+
     options = options || {};
     options.directory = options.directory || config.get('public.root.vendor');
-    options.ignorePath = options.ignorePath || '../../webroot';
+    options.ignorePath = options.ignorePath || calculateIgnorePath();
 
     options.fileTypes = options.fileTypes || {
         php: {
