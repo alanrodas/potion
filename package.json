@@ -1,6 +1,6 @@
 {
   "name": "cakephp-potion",
-  "version": "2.0.2",
+  "version": "2.1.0",
   "description": "CakePHP Potion - Painless Gulp for CakePHP",
   "main": "index.js",
   "scripts": {
@@ -35,6 +35,7 @@
     "gulp-less": "^3.0.3",
     "gulp-load-plugins": "^1.0.0-rc.1",
     "gulp-minify-css": "^1.2.0",
+	"gulp-ng-classify": "^4.0.1",
     "gulp-notify": "^2.2.0",
     "gulp-phpspec": "^0.5.3",
     "gulp-phpunit": "^0.8.1",
