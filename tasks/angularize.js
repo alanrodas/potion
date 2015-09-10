@@ -3,6 +3,7 @@ var ngClassify = require('gulp-ng-classify');
 var coffee = require('gulp-coffee');
 var Potion = require('cakephp-potion');
 var sourcemaps = require('gulp-sourcemaps');
+var addsrc = require('gulp-add-src');
 
 var $ = Potion.Plugins;
 
@@ -39,6 +40,7 @@ Potion.extend('angularize', function(src, output, options) {
                 .src(paths.src.path)
                 .pipe(sourcemaps.init())
                 .pipe($.concat('app.coffee'))
+                .pipe($.if(options.shared, addsrc(options.shared)))
                 .pipe(ngClassify(options))
                 .pipe(coffee({bare: true}))
                 .pipe(sourcemaps.write('.'))
