@@ -1,6 +1,6 @@
 {
   "name": "cakephp-potion",
-  "version": "2.2.3",
+  "version": "2.2.4",
   "description": "CakePHP Potion - Painless Gulp for CakePHP",
   "main": "index.js",
   "scripts": {
